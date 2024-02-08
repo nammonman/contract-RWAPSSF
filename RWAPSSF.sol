@@ -32,6 +32,7 @@ contract RWAPSSF {
 
     function leave() public payable {
         require(numPlayer > 0);
+        require(reward > 0);
         require(block.timestamp - lastActionTime > 5 minutes);
         if (numPlayer == 1) {
             address payable account0 = payable(player[0].addr);
