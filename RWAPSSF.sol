@@ -11,6 +11,28 @@ contract RWAPSSF {
     uint private reward = 0;
     mapping (uint => Player) private player;
     uint private numInput = 0;
+    mapping (address => uint) private playerIdx;
+    uint private time = 0;
+
+    function reset() private {
+        numPlayer = 0;
+        reward = 0;
+        numInput = 0;
+        time = 0;
+        player[0].addr = address(0);
+        player[0].choice = 7;
+        player[1].addr = address(0);
+        player[1].choice = 7;
+    }
+
+    function timeoutPay() public payable {
+        require(block.timestamp - time > 5 minutes);
+        require(playerIdx[player[0].addr] == 0);
+        require(numPlayer == 1);
+        address payable account0 = payable(player[0].addr);
+        account0.transfer(reward); 
+        reset();
+    }
 
     function addPlayer() public payable {
         require(numPlayer < 2);
@@ -18,6 +40,8 @@ contract RWAPSSF {
         reward += msg.value;
         player[numPlayer].addr = msg.sender;
         player[numPlayer].choice = 3;
+        playerIdx[msg.sender] = numPlayer;
+        time = block.timestamp;
         numPlayer++;
     }
 
