@@ -1,7 +1,7 @@
 CHANGES:
 1. เปลี่ยนส่วนที่เป็น `public` ที่ผู้เล่นไม่จำเป็นต้องเห็นมห้เป็น `private`
-2. สร้าง `mapping (address => uint) private playerIdx` สำหรับการค้นหา `idx` ของผู้เล่นโดยใช้ address ในการหา
-3. แก้ `input` ให้รับแค่ `choice` ก็พอ `idx` สามารถใช้ `playerIdx[msg.sender]` หาได้
+2. สร้าง `mapping (address => uint) private playerIdx` สำหรับการค้นหา idx ของผู้เล่นโดยใช้ address ในการหา
+3. แก้ `input` ให้รับแค่ `choice` ก็พอ idx สามารถใช้ `playerIdx[msg.sender]` หาได้
 4. สร้างตัวแปร `lastActionTime` เก็บค่าเวลาล่าสุดที่เกิดแอกชั้นจากฝ่ายใดฝ่ายหนึ่งขึ้น จะอัพเดตเมื่อมีการใช้ `addplayer` หรือ `input`
 5. สร้างฟังชั่น `reset` สำหรับคืนค่าเริ่มต้นให้กับเกมสำหรับเมื่อเกมจบแล้ว
 6. ใส่การเรียก `reset` เพิ่มในทุกกรณีที่มีการจบเกมในทุกฟังก์ชั่น
