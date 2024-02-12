@@ -59,7 +59,8 @@ contract RWAPSSF {
         numPlayer++;
     }
 
-    function input(uint choice, uint idx) public  {
+    function input(uint choice) public  {
+        uint idx = playerIdx[msg.sender];
         require(numPlayer == 2);
         require(msg.sender == player[idx].addr);
         require(choice == 0 || choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7);
