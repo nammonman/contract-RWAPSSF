@@ -47,8 +47,6 @@ contract RWAPSSF {
         reset();
     }
 
-
-
     function addPlayer() public payable {
         require(numPlayer < 2);
         require(msg.value == 1 ether);
@@ -64,7 +62,7 @@ contract RWAPSSF {
     function input(uint choice, uint idx) public  {
         require(numPlayer == 2);
         require(msg.sender == player[idx].addr);
-        require(choice == 0 || choice == 1 || choice == 2);
+        require(choice == 0 || choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7);
         player[idx].choice = choice;
         numInput++;
         lastActionTime = block.timestamp;
