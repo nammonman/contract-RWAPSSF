@@ -6,22 +6,23 @@ import "./CommitReveal.sol";
 
 contract RWAPSSF is CommitReveal {
     struct Player {
-        uint choice; // 0 - Rock, 1 - Paper , 2 - Scissors, 3 - Water, 4 - Air, 5 - Sponge, 6 - Fire, 7 - undefined
+        uint choice; // 0 - Rock, 1 - Fire , 2 - Scissors, 3 - Sponge, 4 - Paper, 5 - Air, 6 - Water, 7 - Undefined
         address addr;
-        Commit com;
         //uint time;
     }
     uint private numPlayer = 0;
     uint private reward = 0;
     mapping (uint => Player) private player;
     uint private numInput = 0;
+    uint private numReveal = 0;
     mapping (address => uint) private playerIdx;
-    uint lastActionTime = 0;
+    uint private lastActionTime = 0;
 
-    function reset() private returns (string memory _text) {
+    function reset() private {
         numPlayer = 0;
         reward = 0;
         numInput = 0;
+        numReveal = 0;
         lastActionTime = 0;
 
         player[0].addr = address(0);
@@ -31,7 +32,7 @@ contract RWAPSSF is CommitReveal {
         player[1].addr = address(0);
         player[1].choice = 7;
         //player[1].time = 0;
-        return ("game ended");
+
     }
 
     function leave() public payable returns (string memory _text){
@@ -65,16 +66,29 @@ contract RWAPSSF is CommitReveal {
         return (reward, numPlayer, msg.sender);
     }
 
-    function input(uint choice) public  {
-        uint idx = playerIdx[msg.sender];
+    function input(uint choice, uint salt) public {
         require(numPlayer == 2);
+        require(numInput < 2);
+        uint idx = playerIdx[msg.sender];
         require(msg.sender == player[idx].addr);
         require(choice == 0 || choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7);
-        player[idx].choice = choice;
+        //player[idx].choice = choice;
+        commit(getSaltedHash(bytes32(choice), bytes32(choice + salt)));
         numInput++;
         lastActionTime = block.timestamp;
-        if (numInput == 2) {
-            _checkWinnerAndPay();
+    }
+
+    function confirmInput(uint choice, uint salt) public returns (uint _winner, uint _pay, uint _p0Choice, uint _p1Choice){
+        require(numInput == 2);
+        revealAnswer(bytes32(choice), bytes32(choice + salt));
+        numReveal++;
+        player[playerIdx[msg.sender]].choice = choice;
+        lastActionTime = block.timestamp;
+        if (numReveal == 2) {
+            return (_checkWinnerAndPay());
+        }
+        else {
+            return (999, 999, 999, 999);
         }
     }
 
