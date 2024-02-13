@@ -11,6 +11,7 @@ CHANGES:
 10. สร้างฟังก์ชั่น `confirmInput` โดยหลังจากที่ทุกคน input มาแล้ว จะต้องใส่ choice กับ salt ที่เหมือนเดิมอีกรอบเพื่อทำการ reveal เมื่อได้ reveal ทั้ง 2 ฝ่ายแล้วจะทำการเรียก `_checkWinnerAndPay`
     
 SCREENSHOTS:
+
 added 2 players
 
 ![added 2 players](https://github.com/nammonman/contract-RWAPSSF/assets/110343092/a7c3d7b6-4372-4de0-acf9-4f1c6509000e)
