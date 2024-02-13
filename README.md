@@ -26,7 +26,7 @@ one player reveals their choice - nothing happened yet
 
 both player reveals their choices - checks winner, pay and resets the game
 
-![p1 reveal](https://github.com/nammonman/contract-RWAPSSF/assets/110343092/03befaa0-a9b0-44f1-bb34-6ab69e52d7e9)
+![p0 reveal](https://github.com/nammonman/contract-RWAPSSF/assets/110343092/dbb4fcb8-df6a-4ea0-a66f-fb7315f0e127)
 
 ![check winner](https://github.com/nammonman/contract-RWAPSSF/assets/110343092/0bba29ef-6b92-4f3b-bb15-5e6edd024043)
 
